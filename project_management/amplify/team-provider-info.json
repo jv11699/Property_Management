@@ -1,0 +1,24 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-projectmanagement-dev-12402-authRole",
+      "UnauthRoleArn": "arn:aws:iam::002995469492:role/amplify-projectmanagement-dev-12402-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::002995469492:role/amplify-projectmanagement-dev-12402-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-projectmanagement-dev-12402-deployment",
+      "UnauthRoleName": "amplify-projectmanagement-dev-12402-unauthRole",
+      "StackName": "amplify-projectmanagement-dev-12402",
+      "StackId": "arn:aws:cloudformation:eu-north-1:002995469492:stack/amplify-projectmanagement-dev-12402/4bc73210-3350-11ee-81e4-067484cac69e",
+      "AmplifyAppId": "d2ekp88kdn1o04",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-projectmanagement-dev-12402-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    },
+    "categories": {
+      "function": {
+        "PropertyManagement": {}
+      },
+      "auth": {
+        "projectmanagement": {}
+      }
+    }
+  }
+}
