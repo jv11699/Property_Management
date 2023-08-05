@@ -13,6 +13,7 @@ const LandingPage = () => {
     <>
     <h1>Property Management Rental Website</h1>
     <h3>by Buffalo Brothers</h3>
+    <div style={{padding:"30px"}}>
        <Authenticator>
       {({ signOut, user }) => (
         <main>
@@ -21,6 +22,7 @@ const LandingPage = () => {
         </main>
       )}
     </Authenticator>
+    </div>
     </>
   );
 };
