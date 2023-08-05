@@ -1,6 +1,4 @@
-{
-  "homepage": "https://jv11699.github.io/Property_Management",
-  "name": "Realty Manager",
+{ "name": "Realty Manager",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
