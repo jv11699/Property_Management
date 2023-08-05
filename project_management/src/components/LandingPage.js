@@ -11,6 +11,8 @@ const LandingPage = () => {
  
   return (
     <>
+    <h1>Property Management Rental Website</h1>
+    <h3>by Buffalo Brothers</h3>
        <Authenticator>
       {({ signOut, user }) => (
         <main>
