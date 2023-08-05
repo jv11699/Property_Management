@@ -1,4 +1,5 @@
-{ "name": "Realty Manager",
+{ "homepage": "https://amplifybackend.dftg1qjdl98ci.amplifyapp.com",
+  "name": "Realty Manager",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
