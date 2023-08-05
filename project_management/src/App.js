@@ -4,6 +4,7 @@ import LandingPage from "./components/LandingPage.js"
 function App() {
   return (
     <>
+      
       <LandingPage />
     </>
   );
