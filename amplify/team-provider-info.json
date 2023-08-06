@@ -14,10 +14,15 @@
     },
     "categories": {
       "function": {
-        "PropertyManagement": {}
+        "PropertyManagement": {},
+        "projectmanagementa69207ddDefineAuthChallenge": {},
+        "projectmanagementa69207ddCreateAuthChallenge": {},
+        "projectmanagement33660d3b": {}
       },
       "auth": {
-        "projectmanagement": {}
+        "projectmanagement": {},
+        "projectmanagementa69207dd": {},
+        "projectmanagementeaed8654": {}
       }
     }
   }
