@@ -1,30 +1,29 @@
 import { Link } from 'react-router-dom';
+import * as React from 'react';
+
+import Box from '@mui/material/Box';
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import RestoreIcon from '@mui/icons-material/Restore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 const Navigation = ({ setLoggedIn }) => {
-    return (
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Property Management</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/PayRent">Pay Rent</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Request Maintenance</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/" onClick={() => setLoggedIn(false)}>Sign out</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    );
+      const [value, setValue] = React.useState(0);
+
+  return (
+    <Box sx={{ width: 500 }}>
+      <BottomNavigation
+        showLabels
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+      >
+        <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+      </BottomNavigation>
+    </Box>
+  );
 }
 export default Navigation
