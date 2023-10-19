@@ -1,62 +1,96 @@
 import React, { useState } from "react";
-import "../css/Form.css";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 const Form = ({ setLoggedIn }) => {
-    const [isLoggingIn, setIsLoggingIn] = useState(false);
-    const handleSubmit = () => {
-        setLoggedIn(true);
-    }
-    return (
-        <div className="Auth-form-container">
-            <form className="Auth-form" onSubmit={handleSubmit}>
-                <div className="Auth-form-content">
-                    {isLoggingIn ? <h3 className="Auth-form-title">Sign In</h3> : <h3 className="Auth-form-title">Sign Up</h3>}
-                    <div className="form-group mt-3">
-                        <label>Email address</label>
-                        <input
-                            type="email"
-                            className="form-control mt-1"
-                            placeholder="Enter email"
-                        />
-                    </div>
-                    <div className="form-group mt-3">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            className="form-control mt-1"
-                            placeholder="Enter password"
-                        />
-                    </div>
-                    {!isLoggingIn && <div className="form-group mt-3">
-                        <label>Confirm Password</label>
-                        <input
-                            type="password"
-                            className="form-control mt-1"
-                            placeholder="Re-enter password"
-                        />
-                    </div>}
-                    <div className="d-grid gap-2 mt-3">
-                        <button type="submit" className="btn btn-primary">
-                            Submit
-                        </button>
-                    </div>
-                    {isLoggingIn ?
-                        <p className="forgot-password text-right mt-2">
-                            Don't have an account? <a href="#" onClick={() => setIsLoggingIn(false)}>Sign In</a>
-                        </p>
-                        :
-                        <>
-                            <p className="forgot-password text-right mt-2">
-                                Already have an account? <a href="#" onClick={() => setIsLoggingIn(true)}>Login</a>
-                            </p>
-                            <p className="forgot-password text-right mt-2">
-                                Forgot <a href="#">Password?</a>
-                            </p>
-                        </>
-                    }
-                </div>
-            </form>
-        </div>
-    );
-}
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setLoggedIn(true);
+    //const data = new FormData(event.currentTarget);
+    //console.log({
+    //  email: data.get('email'),
+    //  password: data.get('password'),
+    //});
+  };
+
+  return (
+      <Container component="main" maxWidth="xs">
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+  );
+};
 export default Form;
