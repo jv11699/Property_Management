@@ -1,92 +1,174 @@
 import * as React from 'react';
+import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
+import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import PeopleIcon from '@mui/icons-material/People';
-import DescriptionIcon from '@mui/icons-material/Description';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-import { Link } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Container from '@mui/material/Container';
+import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
 
-const Navigation = () => {
-  const [open, setOpen] = React.useState(false);
+const pages = ['Rent Payments', 'Maintenance Request', 'Landlord Description'];
+const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+const Navigation = ({user,signOutFunc,setIsLoggedIn}) => {
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
 
-  const handleLogout = () => {
-    // Implement your logout logic here
-    console.log('Logging out...');
-  };
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
 
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="menu"
-        sx={{ mr: 2 }}
-        onClick={handleDrawerOpen}
-      >
-        <MenuIcon />
-        <Typography variant="h6" noWrap>
-          Menu
-        </Typography>
-      </IconButton>
-      <Drawer anchor="left" open={open} onClose={handleDrawerClose}>
-        <List>
-          <ListItem button onClick={handleDrawerClose} component={Link} to="/">
-            <ListItemIcon>
-              <PeopleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Renters" />
-          </ListItem>
-          <ListItem button onClick={handleDrawerClose} component={Link} to="/lease-agreement">
-            <ListItemIcon>
-              <DescriptionIcon />
-            </ListItemIcon>
-            <ListItemText primary="Lease Agreement Template" />
-          </ListItem>
-          <ListItem button onClick={handleDrawerClose} component={Link} to="/financial-dashboard">
-            <ListItemIcon>
-              <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Financial Dashboard" />
-          </ListItem>
-          <ListItem button onClick={handleDrawerClose} component={Link} to="/profile">
-            <ListItemIcon>
-              <AccountCircleIcon />
-            </ListItemIcon>
-            <ListItemText primary="Profile" />
-          </ListItem>
-        </List>
-        <Box mt={2}>
-          <Button variant="outlined" color="primary" onClick={handleLogout} fullWidth>
-            <ExitToAppIcon sx={{ mr: 1 }} />
-            Logout
-          </Button>
-        </Box>
-      </Drawer>
-      {/* Main content area */}
-      <Box sx={{ ml: 3 }}>
-        {/* Add your main content here */}
-      </Box>
-    </Box>
-  );
-};
+    const handleCloseUserMenu = () => {
+      
+        setAnchorElUser(null);
+        
+    };
+    const handleSettingsFunction = (event) => {
+        const setting_val = event.currentTarget.querySelector('p').textContent;
+        if(setting_val === "Logout"){
+            setIsLoggedIn(false);
+            signOutFunc(); 
+        }
+        setAnchorElUser(null);
+        
 
+    }
+
+    return (
+        <AppBar position="static">
+            <Container maxWidth="xl">
+                <Toolbar disableGutters>
+                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'none', md: 'flex' },
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        propAcquire
+                    </Typography>
+
+                    <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleOpenNavMenu}
+                            color="inherit"
+                        >
+                            <MenuIcon />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorElNav}
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'left',
+                            }}
+                            open={Boolean(anchorElNav)}
+                            onClose={handleCloseNavMenu}
+                            sx={{
+                                display: { xs: 'block', md: 'none' },
+                            }}
+                        >
+                            {pages.map((page) => (
+                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">{page}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
+                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    <Typography
+                        variant="h5"
+                        noWrap
+                        component="a"
+                        href=""
+                        sx={{
+                            mr: 2,
+                            display: { xs: 'flex', md: 'none' },
+                            flexGrow: 1,
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
+                        }}
+                    >
+                        LOGO
+                    </Typography>
+                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                        {pages.map((page) => (
+                            <Button
+                                key={page}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'white', display: 'block' }}
+                            >
+                                {page}
+                            </Button>
+                        ))}
+                    </Box>
+                    <Typography textAlign="center" style={{padding:"10px"}}>Welcome, {user.attributes.name}</Typography>
+                    <Box sx={{ flexGrow: 0 }}>
+                        <Tooltip title="Open settings">
+                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            </IconButton>
+                        </Tooltip>
+                        <Menu
+                            sx={{ mt: '45px' }}
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right',
+                            }}
+                            open={Boolean(anchorElUser)}
+                            onClose={() => setAnchorElUser(null)}
+                        >
+                            {settings.map((setting) => (
+                                <MenuItem key={setting} onClick={handleSettingsFunction}>
+                                    <Typography textAlign="center">{setting}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar>
+    );
+}
 export default Navigation;
